@@ -2,11 +2,35 @@ var numbarray = ['','one','two','three','four','five','six','seven','eight','nin
 var nmb = ''
 var blok = "block_"
 var blcknumb = ""
+var turnswitch = "X"
+var turncount = 0
 
 function print(){
 	blcknumb = blok+numbarray[nmb]
-	document.getElementById(blcknumb).innerHTML = "X"
+	document.getElementById(blcknumb).innerHTML = turnswitch
+	
+	turnswitcher()
+	turncounter()
 }
+//Switches which character is displayed.
+function turnswitcher(){
+	if (turnswitch == "X"){
+		turnswitch = "O"
+	}
+	else{
+		turnswitch = "X"
+	}
+}
+//Counts the turns
+function turncounter(){
+	turncount += 1
+	if(turncount == 9){
+		turncount = 0
+		alert("Draw")
+	}
+	
+}
+
 
 function block__one(){
 	nmb = 1
