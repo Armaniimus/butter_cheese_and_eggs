@@ -19,6 +19,7 @@ var blok = "block_"
 var P_one = "Player 1"
 var P_two = "Player 2"
 var P_cpu = "Computer"
+var close_sol = 99
 var character_O = "O" // 0 is for player1
 
 var character_X = "X" // X is for player2
@@ -31,6 +32,17 @@ var cpu = 0 		//1 = singleplayer   		0 = multiplayer
 var game = 0 		//0 = game in process   	1 = game ended
 
 /////////////////////////////////////////////////////////////////////
+function closesolution(){
+	if(close_sol == 99){
+		close_sol= 1
+		varprint= "Known solutions are Disabled"
+	}
+	else{
+		close_sol=99
+		varprint="Known solutions are Enabled"
+	}
+	printdisplay()
+}
 function setpmode_one(){
 	cpu = 1
 	turnswitch = 1
@@ -305,47 +317,57 @@ function cpu_opponent(){
 			temp = "1Count"
 		}
 		
-		else if(arrayofmoves[6] == arrayofmoves[8] && arrayofmoves[9] == 9) {
+		//closes victory lines disabled on purpose
+		else if(arrayofmoves[6] == close_sol && arrayofmoves[8] == close_sol && arrayofmoves[9] == 9) {
 			block__nine()
 			temp = "9specialcount"
 		}
 		
+		else if(arrayofmoves[5] == close_sol && arrayofmoves[9] == close_sol && arrayofmoves[3] == 3){
+			block__three()
+			temp = "3specialcount"
+		}
+		else if(arrayofmoves[3] == close_sol && arrayofmoves[3] == close_sol && arrayofmoves[2] == 20){
+			block__two()
+			temp = "2specialcount"
+		}
+		
 		//makes sure the game get's played out
 		else if(arrayofmoves[1] == 10){
-			temp ="1draw"
 			block__one()
+			temp ="1draw"
 		}
 		else if(arrayofmoves[2] == 20){
-			temp ="2draw"
 			block__two()
+			temp ="2draw"
 		}
 		else if(arrayofmoves[3] == 3){
-			temp ="3draw"
 			block__three()
+			temp ="3draw"
 		}
 		else if(arrayofmoves[4] == 4){
-			temp ="4draw"
 			block__four()
+			temp ="4draw"
 		}
 		else if(arrayofmoves[5] == 5){
-			temp ="5draw"
 			block__five()
+			temp ="5draw"
 		}
 		else if(arrayofmoves[6] == 6){
-			temp ="6draw"
 			block__six()
+			temp ="6draw"
 		}
 		else if(arrayofmoves[7] == 7){
-			temp ="7draw"
 			block__seven()
+			temp ="7draw"
 		}
 		else if(arrayofmoves[8] == 8){
-			temp ="8draw"
 			block__eight()
+			temp ="8draw"
 		}
 		else if(arrayofmoves[9] == 9){
-			temp ="9draw"
 			block__nine()
+			temp ="9draw"
 		}
 			
 		//test info
