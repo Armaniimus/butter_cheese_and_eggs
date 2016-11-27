@@ -22,7 +22,7 @@
 	text-shadow: 5px 5px darkgreen;
 }
 .display{
-	width:215px;
+	width:300px;
 	height: 40px;
 	display: block;
 	border: green solid 3px;
@@ -36,5 +36,30 @@
 	text-shadow: 1px 1px dimgray;
 }
 .button{
+	clear: both;
+	display: block;
+	height: 25px;
+	width: 134px;
+	background-color: lime;
+	border-top: limegreen solid 2px;
+	border-left: limegreen solid 2px;
+	border-bottom: darkgreen solid 2px;
+	border-right: darkgreen solid 2px;
+	color: darkgreen;
+	font-weight: 400;
+	font-size: 16px;
+	text-shadow: 0.5px 0.5px dimgray;
+}
+.button:hover,button:focus{
+	background-color: limegreen;
+	border-bottom: forestgreen solid 2px;
+	border-right: forestgreen solid 2px;
+}
+.buttonwindow{
 	float: left;
+	box-shadow: 1.5px 3.5px 2.5px 1px darkgreen;
+	border: green solid 2px;
+	padding-right:  1px;
+	padding-bottom: 1px;
+	background-color: limegreen;
 }
