@@ -5,9 +5,13 @@
 		<link rel=stylesheet href=butter_cheese_and_eggs_style.css>
 		<meta charset="utf-8">
 		<title>butter cheese and eggs</title>
-		<script src="butter_cheese_and_eggs_javascript.js"></script>
 	</head>
 	<body>
+		<div class=display id=display></div>
+		<button class=button>singleplayer</button>
+		<button class=button>multiplayer</button>
+		<button onclick="reset()" class=button>reset</button>
+		<br><br><br>
 		<div class=ninegrid>
 			<div class=row>
 				<button onclick="block__one()"id=block_one class=box></button>
@@ -25,6 +29,6 @@
 				<button onclick="block__nine()"id=block_nine class=box></button>
 			</div>
 		</div>
-		
+		<script src="butter_cheese_and_eggs_javascript.js"></script>
 	</body>
 </html>
