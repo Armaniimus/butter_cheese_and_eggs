@@ -86,8 +86,8 @@ function execute(){
 			document.getElementById(blcknumb).innerHTML = character; //writes O or X to ID
 			
 			//calculating functions
-			win(); 							//Tests for a won game
 			turncounter();					//counts turn's
+			win(); 							//Tests for a won game
 			if(game == 0){
 				turnswitcher();				//Switches player after each turn
 				cpu_opponent();				//Plays computer opponent
