@@ -19,14 +19,13 @@ var blok = "block_"
 var P_one = "Player 1"
 var P_two = "Player 2"
 var P_cpu = "Computer"
-var close_sol = 99
-var character_O = "O" // 0 is for player1
-
+var character_O = "O" // O is for player1
 var character_X = "X" // X is for player2
 
 var player = 1 //used to indentify player 1
 
 //switches
+var close_sol = 99	//99 known solutions are on	1 known solutions are off
 var turnswitch = 1 	//1 = player1   			2 = player2 or cpu
 var cpu = 0 		//1 = singleplayer   		0 = multiplayer
 var game = 0 		//0 = game in process   	1 = game ended
@@ -78,7 +77,9 @@ function reset(){
 
 //Core of the program
 function execute(){
+	//game 0 is game in progress, game 1 is gameover
 	if(game == 0){
+		//Blocks a filled grid from being overridden.
 		if(arrayofmoves[nmb] != 1 && arrayofmoves[nmb] != 2){
 			//Storage functions
 			blcknumb = blok+numbarray[nmb];	//saves ID name
@@ -92,7 +93,7 @@ function execute(){
 				turnswitcher();				//Switches player after each turn
 				cpu_opponent();				//Plays computer opponent
 			}
-			printdisplay();					//Return's to display
+			printdisplay();					//Return's to user interface
 		}
 	}
 }
@@ -124,7 +125,7 @@ function turncounter(){
 		varturncount = 0
 		varprint = "The game is a draw"
 		game = 1
-		printdisplay()
+		printdisplay()//Return's to user interface
 	}
 }
 ////////////////////////////////////////////////////////////////
@@ -172,7 +173,7 @@ function winprint(){
 		varprint = P_two+" Won the game"	
 		game = 1
 	}
-	printdisplay()
+	printdisplay()//Return's to user interface
 }
 
 ////////////////////////////////////////////////////////////////
@@ -182,13 +183,13 @@ function cpu_opponent(){
 	if(cpu == 1 && turnswitch == 2){
 		//Captures the middle
 		if(arrayofmoves[5] != 1 && arrayofmoves[5] != 2){
-			block__five()
-			temp ="5C"
+			block__five()	//Presses block_five for the cpu
+			temp ="5C"	//info gathering for debugging.
 		}
 		//makes sure top horizontal row isn't captured
 		else if(arrayofmoves[1] == 10 && arrayofmoves[2] == arrayofmoves[3]){
-			block__one()
-			temp ="1H"
+			block__one()	//Presses block_one for the cpu
+			temp ="1H"	//info gathering for debugging.
 		}
 		else if(arrayofmoves[2] == 20 && arrayofmoves[1] == arrayofmoves[3]){
 			block__two()
@@ -231,8 +232,8 @@ function cpu_opponent(){
 		///////////////////////////////////////
 		// makes sure left verticalrow isn't captured
 		else if(arrayofmoves[1] == 10 && arrayofmoves[4] == arrayofmoves[7]){
-			block__one()
-			temp ="1V"
+			block__one()	//Presses block_one for the cpu
+			temp ="1V"	//info gathering for debugging.
 		}
 		else if(arrayofmoves[4] == 4 && arrayofmoves[1] == arrayofmoves[7]){
 			block__four()
@@ -273,8 +274,8 @@ function cpu_opponent(){
 		
 		//makes sure the \\ diagonalrow isn't captured
 		else if(arrayofmoves[1] == 10 && arrayofmoves[5] == arrayofmoves[9]){
-			block__one()
-			temp ="1D"
+			block__one()//Presses block_one for the cpu
+			temp ="1D"//info gathering for debugging.
 		}
 		else if(arrayofmoves[5] == 5 && arrayofmoves[1] == arrayofmoves[9]){
 			block__five()
@@ -287,8 +288,8 @@ function cpu_opponent(){
 		
 		//makes sure the // diagonalrow isn't captured
 		else if(arrayofmoves[3] == 3 && arrayofmoves[5] == arrayofmoves[7]){
-			block__three()
-			temp ="3D"
+			block__three()	//Presses block_three for the cpu
+			temp ="3D"	//info gathering for debugging.
 		}
 		else if(arrayofmoves[5] == 5 && arrayofmoves[3] == arrayofmoves[7]){
 			block__five()
@@ -301,8 +302,8 @@ function cpu_opponent(){
 		
 		//counter movements
 		else if(arrayofmoves[1] == 1 && arrayofmoves[9] == 9){
-			block__nine()
-			temp = "9Count"
+			block__nine() 	//Presses block_nine for the cpu
+			temp = "9Count"	//info gathering for debugging.
 		}
 		else if(arrayofmoves[3] == 1 && arrayofmoves[7] == 7){
 			block__seven()
@@ -319,8 +320,8 @@ function cpu_opponent(){
 		
 		//closes victory lines disabled on purpose
 		else if(arrayofmoves[6] == close_sol && arrayofmoves[8] == close_sol && arrayofmoves[9] == 9) {
-			block__nine()
-			temp = "9specialcount"
+			block__nine() 			//Presses block_nine for the cpu
+			temp = "9specialcount"	//info gathering for debugging.
 		}
 		
 		else if(arrayofmoves[5] == close_sol && arrayofmoves[9] == close_sol && arrayofmoves[3] == 3){
@@ -334,8 +335,8 @@ function cpu_opponent(){
 		
 		//makes sure the game get's played out
 		else if(arrayofmoves[1] == 10){
-			block__one()
-			temp ="1draw"
+			block__one() 	//Presses block_one for the cpu
+			temp ="1draw"	//info gathering for debugging.
 		}
 		else if(arrayofmoves[2] == 20){
 			block__two()
