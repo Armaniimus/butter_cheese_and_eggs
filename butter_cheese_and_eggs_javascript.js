@@ -19,13 +19,14 @@ var blok = "block_"
 var P_one = "Player 1"
 var P_two = "Player 2"
 var P_cpu = "Computer"
-var character_O = "O" // O is for player1
+var close_sol = 99
+var character_O = "O" // 0 is for player1
+
 var character_X = "X" // X is for player2
 
 var player = 1 //used to indentify player 1
 
 //switches
-var close_sol = 99	//99 known solutions are on	1 known solutions are off
 var turnswitch = 1 	//1 = player1   			2 = player2 or cpu
 var cpu = 0 		//1 = singleplayer   		0 = multiplayer
 var game = 0 		//0 = game in process   	1 = game ended
@@ -77,11 +78,8 @@ function reset(){
 
 //Core of the program
 function execute(){
-	//game 0 is game in progress, game 1 is gameover
 	if(game == 0){
-		//Blocks a filled grid from being overridden.
 		if(arrayofmoves[nmb] != 1 && arrayofmoves[nmb] != 2){
-			
 			//Storage functions
 			blcknumb = blok+numbarray[nmb];	//saves ID name
 			arrayofmoves[nmb] = turnswitch; //Saves player action into array
@@ -94,7 +92,7 @@ function execute(){
 				turnswitcher();				//Switches player after each turn
 				cpu_opponent();				//Plays computer opponent
 			}
-			printdisplay();					//Return's to user interface
+			printdisplay();					//Return's to display
 		}
 	}
 }
@@ -126,60 +124,43 @@ function turncounter(){
 		varturncount = 0
 		varprint = "The game is a draw"
 		game = 1
-		printdisplay()//Return's to user interface
+		printdisplay()
 	}
 }
 ////////////////////////////////////////////////////////////////
 
 //checks if some 1 has won
 function win(){
-	switch(nmb){
-		
+	
 	//horizontal checks
-		case 1: case 2:	case 3:
-			if(arrayofmoves[1] == arrayofmoves[2] && arrayofmoves[2] == arrayofmoves[3]){
-				winprint()
-				break;
-			}
-		case 4: case 5:	case 6:
-			if(arrayofmoves[4] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[6]){
-				winprint()
-				break;
-			}
-		case 7: case 8:	case 9:
-			if(arrayofmoves[7] == arrayofmoves[8] && arrayofmoves[8] == arrayofmoves[9]){
-				winprint()
-				break;
-			}
-			
+	if(arrayofmoves[1] == arrayofmoves[2] && arrayofmoves[2] == arrayofmoves[3]){
+		winprint()
+	}
+	else if(arrayofmoves[4] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[6]){
+		winprint()
+	}
+	else if(arrayofmoves[7] == arrayofmoves[8] && arrayofmoves[8] == arrayofmoves[9]){
+		winprint()
+	}
+	
 	//vertical checks
-		case 1: case 4:	case 7:
-			if(arrayofmoves[1] == arrayofmoves[4] && arrayofmoves[4] == arrayofmoves[7]){
-				winprint()
-				break;
-			}
-		case 2: case 5:	case 8:
-			if(arrayofmoves[2] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[8]){
-				winprint()
-				break;
-			}
-		case 3: case 6:	case 9:
-			if(arrayofmoves[3] == arrayofmoves[6] && arrayofmoves[6] == arrayofmoves[9]){
-				winprint()
-				break;
-			}
-			
+	else if(arrayofmoves[1] == arrayofmoves[4] && arrayofmoves[4] == arrayofmoves[7]){
+		winprint()
+	}
+	else if(arrayofmoves[2] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[8]){
+		winprint()
+	}
+	else if(arrayofmoves[3] == arrayofmoves[6] && arrayofmoves[6] == arrayofmoves[9]){
+		winprint()
+	}
+	
 	//diagonal checks
-		case 1: case 5:	case 9:
-			if(arrayofmoves[1] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[9]){
-				winprint()
-				break;
-			}
-		case 3: case 5:	case 7:
-			if(arrayofmoves[3] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[7]){
-				winprint()
-				break;
-			}
+	else if(arrayofmoves[1] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[9]){
+		winprint()
+	}
+	else if(arrayofmoves[3] == arrayofmoves[5] && arrayofmoves[5] == arrayofmoves[7]){
+		
+		winprint()
 	}
 }
 function winprint(){
@@ -191,7 +172,7 @@ function winprint(){
 		varprint = P_two+" Won the game"	
 		game = 1
 	}
-	printdisplay()//Return's to user interface
+	printdisplay()
 }
 
 ////////////////////////////////////////////////////////////////
@@ -199,266 +180,196 @@ function winprint(){
 //Computer opponent{
 function cpu_opponent(){
 	if(cpu == 1 && turnswitch == 2){
-		
-		switch(nmb){
-		
 		//Captures the middle
-			case 1: case 2: case 3: case 4: case 6: case 7: case 8: case 9:
-				if(arrayofmoves[5] != 1 && arrayofmoves[5] != 2){
-					block__five()	//Presses block_five for the cpu
-					temp ="5C"	//info gathering for debugging.
-					break;
-				}
-				
-	//////////////////////////////////////////////
-	//horizontal	
-				
-		//makes sure top horizontal row isn't captured	
-			case 1: case 2: case 3:
-				if(arrayofmoves[1] == 10 && arrayofmoves[2] == arrayofmoves[3]){
-					block__one()	//Presses block_one for the cpu
-					temp ="1H"	//info gathering for debugging.
-					break;
-				}
-				else if(arrayofmoves[2] == 20 && arrayofmoves[1] == arrayofmoves[3]){
-					block__two()
-					temp ="2H"
-					break;
-				}
-				else if(arrayofmoves[3] == 3 && arrayofmoves[1] == arrayofmoves[2]){
-					block__three()
-					temp ="3H"
-					break;
-				}
-				
+		if(arrayofmoves[5] != 1 && arrayofmoves[5] != 2){
+			block__five()
+			temp ="5C"
+		}
+		//makes sure top horizontal row isn't captured
+		else if(arrayofmoves[1] == 10 && arrayofmoves[2] == arrayofmoves[3]){
+			block__one()
+			temp ="1H"
+		}
+		else if(arrayofmoves[2] == 20 && arrayofmoves[1] == arrayofmoves[3]){
+			block__two()
+			temp ="2H"
+		}
+		else if(arrayofmoves[3] == 3 && arrayofmoves[1] == arrayofmoves[2]){
+			block__three()
+			temp ="3H"
+		}
+		
 		//makes sure middle horizontal row isn't captured
-			case 4: case 5: case 6: 
-				if(arrayofmoves[4] == 4 && arrayofmoves[5] == arrayofmoves[6]){
-					block__four()
-					temp ="4H"
-					break;
-				}
-				else if(arrayofmoves[5] == 5 && arrayofmoves[4] == arrayofmoves[6]){
-					block__five()
-					temp ="5H"
-					break;
-				}
-				else if(arrayofmoves[6] == 6 && arrayofmoves[4] == arrayofmoves[5]){
-					block__six()
-					temp ="6H"
-					break;
-				}
+		else if(arrayofmoves[4] == 4 && arrayofmoves[5] == arrayofmoves[6]){
+			block__four()
+			temp ="4H"
+		}
+		else if(arrayofmoves[5] == 5 && arrayofmoves[4] == arrayofmoves[6]){
+			block__five()
+			temp ="5H"
+		}
+		else if(arrayofmoves[6] == 6 && arrayofmoves[4] == arrayofmoves[5]){
+			block__six()
+			temp ="6H"
+		}
 		
 		//makes sure bottom horizontal row isn't captured
-			case 7: case 8: case 9:
-				if(arrayofmoves[7] == 7 && arrayofmoves[8] == arrayofmoves[9]){
-					block__seven()
-					temp ="7H"
-					break;
-				}
-				else if(arrayofmoves[8] == 8 && arrayofmoves[7] == arrayofmoves[9]){
-					block__eight()
-					temp ="8H"
-					break;
-				}
-				else if(arrayofmoves[9] == 9 && arrayofmoves[7] == arrayofmoves[8]){
-					block__nine()
-					temp ="9H"
-					break;
-				}
-
-	/////////////////////////////////////////////////
-	//vertical
-				
-		// makes sure left verticalrow isn't captured
-			case 1: case 4: case 7: 
-				if(arrayofmoves[1] == 10 && arrayofmoves[4] == arrayofmoves[7]){
-					block__one()	//Presses block_one for the cpu
-					temp ="1V"	//info gathering for debugging.
-					break;
-				}
-				else if(arrayofmoves[4] == 4 && arrayofmoves[1] == arrayofmoves[7]){
-					block__four()
-					temp ="4V"
-					break;
-				}
-				else if(arrayofmoves[7] == 7 && arrayofmoves[1] == arrayofmoves[4]){
-					block__seven()
-					temp ="7V"
-					break;
-				}
-				
-		//makes sure the middle verticalrow isn't captured
-			case 2: case 5: case 8: 
-				if(arrayofmoves[2] == 20 && arrayofmoves[5] == arrayofmoves[8]){
-					block__two()
-					temp ="2V"
-					break;
-				}
-				else if(arrayofmoves[5] == 5 && arrayofmoves[2] == arrayofmoves[8]){
-					block__five()
-					temp ="5V"
-				}
-				else if(arrayofmoves[8] == 8 && arrayofmoves[2] == arrayofmoves[5]){
-					block__eight()
-					temp ="8V"
-					break;
-				}
-				
-		//makes sure the right verticalrow isn't captured
-			case 3: case 6: case 9: 
-				if(arrayofmoves[3] == 3 && arrayofmoves[6] == arrayofmoves[9]){
-					block__three()
-					temp ="3V"
-					break;
-				}
-				else if(arrayofmoves[6] == 6 && arrayofmoves[3] == arrayofmoves[9]){
-					block__six()
-					temp ="6V"
-					break;
-				}
-				else if(arrayofmoves[9] == 9 && arrayofmoves[3] == arrayofmoves[6]){
-					block__nine()
-					temp ="9V"
-					break;
-				}
-				
-	//////////////////////////////////////////////////
-	//Diagonal
-				
-		//makes sure the \\ diagonalrow isn't captured
-			case 1: case 5: case 9: 
-				if(arrayofmoves[1] == 10 && arrayofmoves[5] == arrayofmoves[9]){
-					block__one()//Presses block_one for the cpu
-					temp ="1D"//info gathering for debugging.
-					break;
-				}
-				else if(arrayofmoves[5] == 5 && arrayofmoves[1] == arrayofmoves[9]){
-					block__five()
-					temp ="5D"
-					break;
-				}
-				else if(arrayofmoves[9] == 9 && arrayofmoves[1] == arrayofmoves[5]){
-					block__nine()
-					temp ="9D"
-					break;
-				}
-				
-		//makes sure the // diagonalrow isn't captured
-			case 3: case 5: case 7: 
-				if(arrayofmoves[3] == 3 && arrayofmoves[5] == arrayofmoves[7]){
-					block__three()	//Presses block_three for the cpu
-					temp ="3D"	//info gathering for debugging.
-					break;
-				}
-				else if(arrayofmoves[5] == 5 && arrayofmoves[3] == arrayofmoves[7]){
-					block__five()
-					temp ="5D"
-					break;
-				}
-				else if(arrayofmoves[7] == 7 && arrayofmoves[3] == arrayofmoves[5]){
-					block__seven()
-					temp ="7D"
-					break;
-				}
-				
-	////////////////////////////////////////
-	//Advanced counter tactics
-				
-		//counter movements
-			case 1: case 3: case 7: case 9: 
-				if(arrayofmoves[1] == 1 && arrayofmoves[9] == 9){
-					block__nine() 	//Presses block_nine for the cpu
-					temp = "9Count"	//info gathering for debugging.
-					break;
-				}
-				else if(arrayofmoves[3] == 1 && arrayofmoves[7] == 7){
-					block__seven()
-					temp = "7Count"
-					break;
-				}
-				else if(arrayofmoves[7] == 1 && arrayofmoves[3] == 3){
-					block__three()
-					temp = "3Count"
-					break;
-				}
-				else if(arrayofmoves[9] == 1 && arrayofmoves[1] == 10){
-					block__one()
-					temp = "1Count"
-					break;
-				}
-				
-		//closes victory lines disabled on purpose
-			case 6: case 8: 
-				if(arrayofmoves[6] == close_sol && arrayofmoves[8] == close_sol && arrayofmoves[9] == 9) {
-					block__nine() 			//Presses block_nine for the cpu
-					temp = "9specialcount"	//info gathering for debugging.
-					break;
-				}
-			case 5: case 9: 
-				if(arrayofmoves[5] == close_sol && arrayofmoves[9] == close_sol && arrayofmoves[3] == 3){
-					block__three()
-					temp = "3specialcount"
-					break;
-				}
-			case 3: case 7:
-				if(arrayofmoves[3] == close_sol && arrayofmoves[7] == close_sol && arrayofmoves[2] == 20){
-					block__two()
-					temp = "2specialcount"
-					break;
-				}
-				
-	/////////////////////////////////////////////
-	//Else moves
-				
-		//makes sure the game get's played out
-			case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
-				if(arrayofmoves[1] == 10){
-					block__one() 	//Presses block_one for the cpu
-					temp ="1draw"	//info gathering for debugging.
-					break;
-				}
-				else if(arrayofmoves[2] == 20){
-					block__two()
-					temp ="2draw"
-					break;
-				}
-				else if(arrayofmoves[3] == 3){
-					block__three()
-					temp ="3draw"
-					break;
-				}
-				else if(arrayofmoves[4] == 4){
-					block__four()
-					temp ="4draw"
-					break;
-				}
-				else if(arrayofmoves[5] == 5){
-					block__five()
-					temp ="5draw"
-					break;
-				}
-				else if(arrayofmoves[6] == 6){
-					block__six()
-					temp ="6draw"
-					break;
-				}
-				else if(arrayofmoves[7] == 7){
-					block__seven()
-					temp ="7draw"
-					break;
-				}
-				else if(arrayofmoves[8] == 8){
-					block__eight()
-					temp ="8draw"
-					break;
-				}
-				else if(arrayofmoves[9] == 9){
-					block__nine()
-					temp ="9draw"
-					break;
-				}
+		else if(arrayofmoves[7] == 7 && arrayofmoves[8] == arrayofmoves[9]){
+			block__seven()
+			temp ="7H"
 		}
+		else if(arrayofmoves[8] == 8 && arrayofmoves[7] == arrayofmoves[9]){
+			block__eight()
+			temp ="8H"
+		}
+		else if(arrayofmoves[9] == 9 && arrayofmoves[7] == arrayofmoves[8]){
+			block__nine()
+			temp ="9H"
+		}
+		
+		
+		///////////////////////////////////////
+		// makes sure left verticalrow isn't captured
+		else if(arrayofmoves[1] == 10 && arrayofmoves[4] == arrayofmoves[7]){
+			block__one()
+			temp ="1V"
+		}
+		else if(arrayofmoves[4] == 4 && arrayofmoves[1] == arrayofmoves[7]){
+			block__four()
+			temp ="4V"
+		}
+		else if(arrayofmoves[7] == 7 && arrayofmoves[1] == arrayofmoves[4]){
+			block__seven()
+			temp ="7V"
+		}
+		
+		//makes sure the middle verticalrow isn't captured
+		else if(arrayofmoves[2] == 20 && arrayofmoves[5] == arrayofmoves[8]){
+			block__two()
+			temp ="2V"
+		}
+		else if(arrayofmoves[5] == 5 && arrayofmoves[2] == arrayofmoves[8]){
+			block__five()
+			temp ="5V"
+		}
+		else if(arrayofmoves[8] == 8 && arrayofmoves[2] == arrayofmoves[5]){
+			block__eight()
+			temp ="8V"
+		}
+		
+		//makes sure the right verticalrow isn't captured
+		else if(arrayofmoves[3] == 3 && arrayofmoves[6] == arrayofmoves[9]){
+			block__three()
+			temp ="3V"
+		}
+		else if(arrayofmoves[6] == 6 && arrayofmoves[3] == arrayofmoves[9]){
+			block__six()
+			temp ="6V"
+		}
+		else if(arrayofmoves[9] == 9 && arrayofmoves[3] == arrayofmoves[6]){
+			block__nine()
+			temp ="9V"
+		}
+		
+		//makes sure the \\ diagonalrow isn't captured
+		else if(arrayofmoves[1] == 10 && arrayofmoves[5] == arrayofmoves[9]){
+			block__one()
+			temp ="1D"
+		}
+		else if(arrayofmoves[5] == 5 && arrayofmoves[1] == arrayofmoves[9]){
+			block__five()
+			temp ="5D"
+		}
+		else if(arrayofmoves[9] == 9 && arrayofmoves[1] == arrayofmoves[5]){
+			block__nine()
+			temp ="9D"
+		}		
+		
+		//makes sure the // diagonalrow isn't captured
+		else if(arrayofmoves[3] == 3 && arrayofmoves[5] == arrayofmoves[7]){
+			block__three()
+			temp ="3D"
+		}
+		else if(arrayofmoves[5] == 5 && arrayofmoves[3] == arrayofmoves[7]){
+			block__five()
+			temp ="5D"
+		}
+		else if(arrayofmoves[7] == 7 && arrayofmoves[3] == arrayofmoves[5]){
+			block__seven()
+			temp ="7D"
+		}		
+		
+		//counter movements
+		else if(arrayofmoves[1] == 1 && arrayofmoves[9] == 9){
+			block__nine()
+			temp = "9Count"
+		}
+		else if(arrayofmoves[3] == 1 && arrayofmoves[7] == 7){
+			block__seven()
+			temp = "7Count"
+		}
+		else if(arrayofmoves[7] == 1 && arrayofmoves[3] == 3){
+			block__three()
+			temp = "3Count"
+		}
+		else if(arrayofmoves[9] == 1 && arrayofmoves[1] == 10){
+			block__one()
+			temp = "1Count"
+		}
+		
+		//closes victory lines disabled on purpose
+		else if(arrayofmoves[6] == close_sol && arrayofmoves[8] == close_sol && arrayofmoves[9] == 9) {
+			block__nine()
+			temp = "9specialcount"
+		}
+		
+		else if(arrayofmoves[5] == close_sol && arrayofmoves[9] == close_sol && arrayofmoves[3] == 3){
+			block__three()
+			temp = "3specialcount"
+		}
+		else if(arrayofmoves[3] == close_sol && arrayofmoves[3] == close_sol && arrayofmoves[2] == 20){
+			block__two()
+			temp = "2specialcount"
+		}
+		
+		//makes sure the game get's played out
+		else if(arrayofmoves[1] == 10){
+			block__one()
+			temp ="1draw"
+		}
+		else if(arrayofmoves[2] == 20){
+			block__two()
+			temp ="2draw"
+		}
+		else if(arrayofmoves[3] == 3){
+			block__three()
+			temp ="3draw"
+		}
+		else if(arrayofmoves[4] == 4){
+			block__four()
+			temp ="4draw"
+		}
+		else if(arrayofmoves[5] == 5){
+			block__five()
+			temp ="5draw"
+		}
+		else if(arrayofmoves[6] == 6){
+			block__six()
+			temp ="6draw"
+		}
+		else if(arrayofmoves[7] == 7){
+			block__seven()
+			temp ="7draw"
+		}
+		else if(arrayofmoves[8] == 8){
+			block__eight()
+			temp ="8draw"
+		}
+		else if(arrayofmoves[9] == 9){
+			block__nine()
+			temp ="9draw"
+		}
+			
 		//test info
 		//varprint ="<br />"+temp+nmb
 		//varprint +="<br />"+arrayofmoves
