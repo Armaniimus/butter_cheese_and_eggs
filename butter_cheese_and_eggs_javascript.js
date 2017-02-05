@@ -43,20 +43,21 @@ function closesolution(){
 	}
 	printdisplay()
 }
-function setpmode_one(){
-	cpu = 1
-	turnswitch = 1
-	reset()
-	varprint = "Human player starts first"
-	printdisplay()	
-	P_two = "Computer"
+function setpmode(i){
+    "use strict";
+    reset();
+    if (i === 0) {
+        cpu = 1;
+        varprint = "Human player starts first";
+        P_two = "Computer";
+        printdisplay()
+    } else {
+        cpu = 0;
+        P_two = "Player 2";
+    }
+    turnswitch = 1;
 }
-function setpmode_two(){
-	cpu = 0
-	turnswitch = 1
-	reset()
-	P_two = "Player 2"
-}
+
 
 ///////////////////////////////////////////////////////////////////
 
