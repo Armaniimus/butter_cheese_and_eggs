@@ -45,17 +45,18 @@ function closesolution(){
 }
 function setpmode(i){
     "use strict";
-    reset();
+    turnswitch = 1;
     if (i === 0) {
         cpu = 1;
+        reset();
         varprint = "Human player starts first";
-        P_two = "Computer";
         printdisplay()
+        P_two = "Computer";
     } else {
         cpu = 0;
         P_two = "Player 2";
+        reset();
     }
-    turnswitch = 1;
 }
 
 
@@ -178,53 +179,53 @@ function winprint(){
 
 ////////////////////////////////////////////////////////////////
 
-//Computer opponent{
+//Computer opponent
 function cpu_opponent(){
 	if(cpu == 1 && turnswitch == 2){
 		//Captures the middle
 		if(arrayofmoves[5] != 1 && arrayofmoves[5] != 2){
-			block__five()
+			block(5)
 			temp ="5C"
 		}
 		//makes sure top horizontal row isn't captured
 		else if(arrayofmoves[1] == 10 && arrayofmoves[2] == arrayofmoves[3]){
-			block__one()
+			block(1)
 			temp ="1H"
 		}
 		else if(arrayofmoves[2] == 20 && arrayofmoves[1] == arrayofmoves[3]){
-			block__two()
+			block(2)
 			temp ="2H"
 		}
 		else if(arrayofmoves[3] == 3 && arrayofmoves[1] == arrayofmoves[2]){
-			block__three()
+			block(3)
 			temp ="3H"
 		}
 		
 		//makes sure middle horizontal row isn't captured
 		else if(arrayofmoves[4] == 4 && arrayofmoves[5] == arrayofmoves[6]){
-			block__four()
+			block(4)
 			temp ="4H"
 		}
 		else if(arrayofmoves[5] == 5 && arrayofmoves[4] == arrayofmoves[6]){
-			block__five()
+			block(5)
 			temp ="5H"
 		}
 		else if(arrayofmoves[6] == 6 && arrayofmoves[4] == arrayofmoves[5]){
-			block__six()
+			block(6)
 			temp ="6H"
 		}
 		
 		//makes sure bottom horizontal row isn't captured
 		else if(arrayofmoves[7] == 7 && arrayofmoves[8] == arrayofmoves[9]){
-			block__seven()
+			block(7)
 			temp ="7H"
 		}
 		else if(arrayofmoves[8] == 8 && arrayofmoves[7] == arrayofmoves[9]){
-			block__eight()
+			block(8)
 			temp ="8H"
 		}
 		else if(arrayofmoves[9] == 9 && arrayofmoves[7] == arrayofmoves[8]){
-			block__nine()
+			block(9)
 			temp ="9H"
 		}
 		
@@ -232,142 +233,142 @@ function cpu_opponent(){
 		///////////////////////////////////////
 		// makes sure left verticalrow isn't captured
 		else if(arrayofmoves[1] == 10 && arrayofmoves[4] == arrayofmoves[7]){
-			block__one()
+			block(1)
 			temp ="1V"
 		}
 		else if(arrayofmoves[4] == 4 && arrayofmoves[1] == arrayofmoves[7]){
-			block__four()
+			block(4)
 			temp ="4V"
 		}
 		else if(arrayofmoves[7] == 7 && arrayofmoves[1] == arrayofmoves[4]){
-			block__seven()
+			block(7)
 			temp ="7V"
 		}
 		
 		//makes sure the middle verticalrow isn't captured
 		else if(arrayofmoves[2] == 20 && arrayofmoves[5] == arrayofmoves[8]){
-			block__two()
+			block(2)
 			temp ="2V"
 		}
 		else if(arrayofmoves[5] == 5 && arrayofmoves[2] == arrayofmoves[8]){
-			block__five()
+			block(5)
 			temp ="5V"
 		}
 		else if(arrayofmoves[8] == 8 && arrayofmoves[2] == arrayofmoves[5]){
-			block__eight()
+			block(8)
 			temp ="8V"
 		}
 		
 		//makes sure the right verticalrow isn't captured
 		else if(arrayofmoves[3] == 3 && arrayofmoves[6] == arrayofmoves[9]){
-			block__three()
+			block(3)
 			temp ="3V"
 		}
 		else if(arrayofmoves[6] == 6 && arrayofmoves[3] == arrayofmoves[9]){
-			block__six()
+			block(6)
 			temp ="6V"
 		}
 		else if(arrayofmoves[9] == 9 && arrayofmoves[3] == arrayofmoves[6]){
-			block__nine()
+			block(9)
 			temp ="9V"
 		}
 		
 		//makes sure the \\ diagonalrow isn't captured
 		else if(arrayofmoves[1] == 10 && arrayofmoves[5] == arrayofmoves[9]){
-			block__one()
+			block(1)
 			temp ="1D"
 		}
 		else if(arrayofmoves[5] == 5 && arrayofmoves[1] == arrayofmoves[9]){
-			block__five()
+			block(5)
 			temp ="5D"
 		}
 		else if(arrayofmoves[9] == 9 && arrayofmoves[1] == arrayofmoves[5]){
-			block__nine()
+			block(9)
 			temp ="9D"
 		}		
 		
 		//makes sure the // diagonalrow isn't captured
 		else if(arrayofmoves[3] == 3 && arrayofmoves[5] == arrayofmoves[7]){
-			block__three()
+			block(3)
 			temp ="3D"
 		}
 		else if(arrayofmoves[5] == 5 && arrayofmoves[3] == arrayofmoves[7]){
-			block__five()
+			block(5)
 			temp ="5D"
 		}
 		else if(arrayofmoves[7] == 7 && arrayofmoves[3] == arrayofmoves[5]){
-			block__seven()
+			block(7)
 			temp ="7D"
 		}		
 		
 		//counter movements
 		else if(arrayofmoves[1] == 1 && arrayofmoves[9] == 9){
-			block__nine()
+			block(9)
 			temp = "9Count"
 		}
 		else if(arrayofmoves[3] == 1 && arrayofmoves[7] == 7){
-			block__seven()
+			block(7)
 			temp = "7Count"
 		}
 		else if(arrayofmoves[7] == 1 && arrayofmoves[3] == 3){
-			block__three()
+			block(3)
 			temp = "3Count"
 		}
 		else if(arrayofmoves[9] == 1 && arrayofmoves[1] == 10){
-			block__one()
+			block(1)
 			temp = "1Count"
 		}
 		
 		//closes victory lines disabled on purpose
 		else if(arrayofmoves[6] == close_sol && arrayofmoves[8] == close_sol && arrayofmoves[9] == 9) {
-			block__nine()
+			block(9)
 			temp = "9specialcount"
 		}
 		
 		else if(arrayofmoves[5] == close_sol && arrayofmoves[9] == close_sol && arrayofmoves[3] == 3){
-			block__three()
+			block(3)
 			temp = "3specialcount"
 		}
 		else if(arrayofmoves[3] == close_sol && arrayofmoves[3] == close_sol && arrayofmoves[2] == 20){
-			block__two()
+			block(2)
 			temp = "2specialcount"
 		}
 		
 		//makes sure the game get's played out
 		else if(arrayofmoves[1] == 10){
-			block__one()
+			block(1)
 			temp ="1draw"
 		}
 		else if(arrayofmoves[2] == 20){
-			block__two()
+			block(2)
 			temp ="2draw"
 		}
 		else if(arrayofmoves[3] == 3){
-			block__three()
+			block(3)
 			temp ="3draw"
 		}
 		else if(arrayofmoves[4] == 4){
-			block__four()
+			block(4)
 			temp ="4draw"
 		}
 		else if(arrayofmoves[5] == 5){
-			block__five()
+			block(5)
 			temp ="5draw"
 		}
 		else if(arrayofmoves[6] == 6){
-			block__six()
+			block(6)
 			temp ="6draw"
 		}
 		else if(arrayofmoves[7] == 7){
-			block__seven()
+			block(7)
 			temp ="7draw"
 		}
 		else if(arrayofmoves[8] == 8){
-			block__eight()
+			block(8)
 			temp ="8draw"
 		}
 		else if(arrayofmoves[9] == 9){
-			block__nine()
+			block(9)
 			temp ="9draw"
 		}
 			
@@ -382,38 +383,13 @@ function cpu_opponent(){
 /////////////////////////////////////////////////////////////////
 
 //Blocks to number input
-function block__one(){
-	nmb = 1
+
+function block(i){
+	nmb = i
 	execute()
 }
-function block__two(){
-	nmb = 2
-	execute()
-}
-function block__three(){
-	nmb = 3
-	execute()
-}
-function block__four(){
-	nmb = 4
-	execute()
-}
-function block__five(){
-	nmb = 5
-	execute()
-}
-function block__six(){
-	nmb = 6
-	execute()
-}
-function block__seven(){
-	nmb = 7
-	execute()
-}
-function block__eight(){
-	nmb = 8
-	execute()
-}
+
+
 function block__nine(){
 	nmb = 9
 	execute()
