@@ -64,7 +64,7 @@ function reset(i) {
 	turnswitcher();
 	turnswitcher();
 	printdisplay();
-	arrayofmoves = ['', '10', '20', '3', '4', '5', '6', '7', '8', '9'];
+	arrayofmoves = [0, 10, 20, 3, 4, 5, 6, 7, 8, 9];
 	game = 0;
 }
 
@@ -166,7 +166,7 @@ function block(i) {
 function cpu_opponent() {
     "use strict";
 	if (cpu === 1 && turnswitch === 2) {
-		//Captures the middle
+        //Captures the middle
 		if (arrayofmoves[5] !== 1 && arrayofmoves[5] !== 2) {
 			block(5);
 			temp = "5C";
@@ -180,7 +180,8 @@ function cpu_opponent() {
 			temp = "2H";
 		} else if (arrayofmoves[3] === 3 && arrayofmoves[1] === arrayofmoves[2]) {
 			block(3);
-			temp = "3H;";
+			temp = "3H";
+		
 		
 		
 		//makes sure middle horizontal row isn't captured
@@ -308,9 +309,6 @@ function cpu_opponent() {
 		} else if (arrayofmoves[4] === 4) {
 			block(4);
 			temp = "4draw";
-		} else if (arrayofmoves[5] === 5) {
-			block(5);
-			temp = "5draw";
 		} else if (arrayofmoves[6] === 6) {
 			block(6);
 			temp = "6draw";
@@ -326,8 +324,8 @@ function cpu_opponent() {
 		}
         
 		//test info
-		//varprint ="<br />"+temp+nmb
-		//varprint +="<br />"+arrayofmoves
+		//varprint = "<br />" + temp + nmb;
+		//varprint += "<br />" + arrayofmoves;
 		
 		printdisplay();	//return's to display after computer turn and for tests
 	}
